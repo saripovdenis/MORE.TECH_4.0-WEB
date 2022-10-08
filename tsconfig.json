@@ -16,9 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
-    "pages": {
-      "@pages/*": ["pages/*"],
+    "paths": {
+      "@core/*": ["core/*"],
       "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@lib/*": ["lib/*"],
+      "@containers/*": ["containers/*"],
+      "@styles": ["styles"],
     }
   },
   "include": ["src"],

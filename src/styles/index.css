@@ -1,0 +1,15 @@
+:root {}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: -webkit-fill-available;
+}
+
+body {
+    box-sizing: border-box;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}

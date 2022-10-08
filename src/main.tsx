@@ -1,9 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./normalize.css";
-import "./index.css";
+import { render } from "@lib/render";
+import { AppProvider } from "@containers/AppProvider";
+import { Router } from "@containers/Router";
+import "@styles";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />
+render(
+  <AppProvider>
+    <Router />
+  </AppProvider>
 );
