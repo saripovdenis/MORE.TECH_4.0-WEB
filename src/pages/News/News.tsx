@@ -1,5 +1,5 @@
-import { FC, useState, useCallback } from "react";
-import { useQuery } from "react-query";
+import { FC, useState, useCallback, useEffect } from "react";
+import { useQuery, useQueryClient } from "react-query";
 
 import { AppLayout } from "@components/AppLayout";
 import { Tabs } from "@components/Tabs";
@@ -20,19 +20,47 @@ import {
 
 export const News: FC = () => {
   const [role, setRole] = useState<Roles>(Roles.Director);
-  const setTab = useCallback(
-    (index: number) => setRole(tabsItems[index]?.role ?? Roles.Director),
-    [tabsItems]
+  const [isDigSkeleton, setIsDigestSkeleton] = useState<boolean>(true);
+  const [isTrendSkeleton, setIsTrendsSkeleton] = useState<boolean>();
+
+  const queryClient = useQueryClient();
+
+  const digestQuery = useQuery<DigestData>(
+    "digestQuery",
+    ({ signal }) => newsApi.getDigest(role, signal, false),
+    {
+      refetchOnWindowFocus: false,
+    }
   );
-  const digestQuery = useQuery<DigestData>("digestQuery", ({ signal }) =>
-    newsApi.getDigest(role, signal, false)
-  );
-  const trendsQuery = useQuery<TrendsData>("trendsQuery", ({ signal }) =>
-    newsApi.getTrends(role, signal, true)
+  const trendsQuery = useQuery<TrendsData>(
+    "trendsQuery",
+    ({ signal }) => newsApi.getTrends(role, signal, false),
+    {
+      refetchOnWindowFocus: false,
+    }
   );
 
-  const isDigestSkeleton = Boolean(digestQuery.isLoading || digestQuery.error);
-  const isTrendsSkeleton = Boolean(trendsQuery.isLoading || trendsQuery.error);
+  useEffect(() => {
+    setIsDigestSkeleton(digestQuery.error ? true : digestQuery.isFetching);
+    setIsTrendsSkeleton(trendsQuery.error ? true : trendsQuery.isFetching);
+  }, [digestQuery, trendsQuery]);
+
+  const setTab = useCallback(
+    (index: number) => {
+      setIsDigestSkeleton(true);
+      setIsTrendsSkeleton(true);
+      Promise.all([
+        queryClient.cancelQueries("digestQuery"),
+        queryClient.cancelQueries("trendsQuery"),
+      ])
+        .then(() => setRole(tabsItems[index]?.role ?? Roles.Director))
+        .then(() => {
+          digestQuery.refetch();
+          trendsQuery.refetch();
+        });
+    },
+    [tabsItems, digestQuery, trendsQuery]
+  );
 
   const digestItems =
     digestQuery?.data?.items ?? Array(skeletonsCount).fill(undefined);
@@ -47,12 +75,12 @@ export const News: FC = () => {
         <NewsBlock
           header={digestLabel}
           items={digestItems}
-          isSkeleton={isDigestSkeleton}
+          isSkeleton={isDigSkeleton}
         />
         <NewsBlock
           header={trendsLabel}
           items={trendsItems}
-          isSkeleton={isTrendsSkeleton}
+          isSkeleton={isTrendSkeleton}
         />
       </div>
     </AppLayout>

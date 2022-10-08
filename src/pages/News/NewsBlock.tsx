@@ -16,9 +16,13 @@ export const NewsBlock: FC<Props> = ({ header, isSkeleton = true, items }) => {
         {header}
       </Typography>
       <div className={styles.itemsWrapper}>
-        {items.map((el, i) => (
-          <InfoItem key={el?.title ?? i} {...el} isSkeleton={isSkeleton} />
-        ))}
+        {items.map((el, i) => {
+          if (!(isSkeleton && i > 2)) {
+            return (
+              <InfoItem key={el?.title ?? i} {...el} isSkeleton={isSkeleton} />
+            );
+          }
+        })}
       </div>
     </div>
   );

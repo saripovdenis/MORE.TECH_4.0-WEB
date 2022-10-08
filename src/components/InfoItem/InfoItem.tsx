@@ -1,34 +1,27 @@
-import { FC } from "react";
-import { SkeletonText, Skeleton } from "@chakra-ui/react";
+import { ComponentProps, FC } from "react";
+import { SkeletonText, SkeletonCircle } from "@chakra-ui/react";
 import { Panel } from "@components/Panel";
 import { Typography } from "@components/Typography";
 
 import styles from "./InfoItem.module.scss";
+import { LinkList } from "@components/InfoItem/LinkList";
 
 type Props = {
   title?: string;
+  links?: ComponentProps<typeof LinkList>["items"];
   isSkeleton?: boolean;
 };
 
-export const InfoItem: FC<Props> = ({ isSkeleton, title = "" }) => (
+export const InfoItem: FC<Props> = ({
+  isSkeleton,
+  title = "",
+  links = [undefined, undefined, undefined],
+}) => (
   <Panel className={styles.block}>
     <div className={styles.textContainer}>
       <div className={styles.titleContainer}>
-        <Skeleton
-          startColor="teal.200"
-          height="20px"
-          isLoaded={!isSkeleton}
-          style={{ width: isSkeleton ? "100px" : "100%", borderRadius: "20px" }}
-          fadeDuration={2}
-        >
-          <Typography as="h3" className={styles.title}>
-            {title}
-          </Typography>
-        </Skeleton>
-      </div>
-      <div>
         <SkeletonText
-          startColor="teal.200"
+          startColor="teal.300"
           isLoaded={!isSkeleton}
           style={{ width: "100%" }}
           mt="4"
@@ -36,8 +29,13 @@ export const InfoItem: FC<Props> = ({ isSkeleton, title = "" }) => (
           spacing="5"
           fadeDuration={2}
         >
-          <div></div>
+          <Typography as="h3" className={styles.title}>
+            {title}
+          </Typography>
         </SkeletonText>
+      </div>
+      <div>
+        <LinkList items={links} isSkeleton={isSkeleton} />
       </div>
     </div>
   </Panel>
