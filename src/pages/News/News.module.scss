@@ -1,0 +1,36 @@
+@value isMobile: screen and (max-width: 425px);
+
+.block {}
+
+.header {
+    @media isMobile {
+        margin: auto;
+    }
+}
+
+.content {
+    width: 100%;
+    display: grid;
+    justify-items: auto;
+    gap: 40px;
+
+    @media isMobile {
+        justify-items: center;
+    }
+}
+
+.container {
+    width: 100%;
+    display: grid;
+    gap: 20px;
+}
+
+.itemsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media isMobile {
+        display: grid;
+    }
+}

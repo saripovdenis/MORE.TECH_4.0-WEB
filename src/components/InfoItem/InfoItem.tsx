@@ -11,6 +11,7 @@ type Props = {
 export const InfoItem: FC<Props> = ({ isSkeleton }) => (
   <Panel className={styles.block}>
     <SkeletonText
+      endColor="teal.200"
       isLoaded={!isSkeleton}
       style={{ width: "100%" }}
       mt="4"
