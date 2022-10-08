@@ -12,4 +12,5 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     min-height: -webkit-fill-available;
+    font-family: 'Raleway', sans-serif !important;
 }
