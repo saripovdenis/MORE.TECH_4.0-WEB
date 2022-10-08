@@ -3,7 +3,7 @@ import cx from "classnames";
 
 import styles from "./Typography.module.css";
 
-type As = "h1" | "h2" | "h3" | "span";
+type As = "h1" | "h2" | "h3" | "p" | "span";
 
 type Props = {
   as?: As;

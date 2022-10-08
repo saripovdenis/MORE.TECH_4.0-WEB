@@ -23,6 +23,7 @@
       "@lib/*": ["lib/*"],
       "@containers/*": ["containers/*"],
       "@styles": ["styles"],
+      "@sources/*": ["sources/*"],
     }
   },
   "include": ["src"],

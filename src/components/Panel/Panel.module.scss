@@ -1,11 +1,15 @@
 .block {
     padding: 10px;
-    border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
 }
 
+.block:hover {
+    box-shadow: var(--teal) 0 7px 29px 0;
+}
+
 .content {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }

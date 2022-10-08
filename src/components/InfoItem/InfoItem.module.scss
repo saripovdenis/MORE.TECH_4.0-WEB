@@ -1,0 +1,29 @@
+.block {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    min-height: 320px;
+    cursor: pointer;
+
+    border-radius: 20px;
+}
+
+.textContainer {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+}
+
+.titleContainer {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    margin: 0 auto;
+}

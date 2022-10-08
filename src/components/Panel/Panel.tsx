@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import cx from "classnames";
 
-import styles from "./Panel.module.css";
+import styles from "./Panel.module.scss";
 
 type Props = {
   children: ReactNode;

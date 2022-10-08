@@ -7,11 +7,16 @@ import styles from "./Tabs.module.css";
 
 type Props = {
   items: string[];
+  setTab?: (index: number) => void;
 };
 
-export const Tabs: FC<Props> = ({ items }) => (
+export const Tabs: FC<Props> = ({ items, setTab }) => (
   <Panel className={styles.block}>
-    <TabsUI variant="soft-rounded" colorScheme="teal">
+    <TabsUI
+      onChange={(index) => setTab?.(index)}
+      variant="soft-rounded"
+      colorScheme="teal"
+    >
       <TabList>
         {items.map((el) => (
           <Tab key={el}>{el}</Tab>

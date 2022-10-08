@@ -11,6 +11,7 @@ export default defineConfig({
       "@lib": path.resolve(__dirname, "./src/lib"),
       "@containers": path.resolve(__dirname, "./src/containers"),
       "@styles": path.resolve(__dirname, "./src/styles"),
+      "@sources": path.resolve(__dirname, "./src/sources"),
     },
   },
   plugins: [react()],
