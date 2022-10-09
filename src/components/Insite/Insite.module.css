@@ -1,0 +1,14 @@
+.block {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    min-height: 320px;
+    padding: 10px;
+}
+
+.content {
+    width: 100%;
+    height: auto;
+    display: grid;
+    gap: 20px;
+}

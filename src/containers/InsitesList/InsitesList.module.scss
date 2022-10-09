@@ -1,0 +1,24 @@
+@value isMobile: screen and (max-width: 425px);
+
+.block {
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media isMobile {
+        display: grid;
+    }
+}
+
+.panel {
+    width: 100%;
+    max-width: 320px;
+    min-height: 320px;
+    border-radius: 20px;
+}

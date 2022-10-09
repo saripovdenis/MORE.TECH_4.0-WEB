@@ -34,3 +34,24 @@
         display: grid;
     }
 }
+
+.tabsNBtn {
+    display: flex;
+    gap: 20px;
+
+    @media isMobile {
+        display: grid;
+    }
+}
+
+.panel {
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    width: 100%;
+    border-radius: 20px;
+}

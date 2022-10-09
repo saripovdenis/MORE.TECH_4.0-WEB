@@ -5,6 +5,8 @@ import type {
   DigestData,
   RoleData,
   Roles,
+  CreateRoleData,
+  InsitesData,
 } from "@sources/newsApi/types";
 
 import { digestData } from "./mock/digest";
@@ -17,9 +19,14 @@ class NewsApi {
   private readonly baseUrl: string;
   private readonly fetchInstance: AxiosInstance;
 
+  private async getRequest<T>(url: string): Promise<T> {
+    const data = await this.fetchInstance.get<T>(url);
+    return data.data;
+  }
+
   private async postRequest<T>(
     url: string,
-    postData: RoleData,
+    postData: any,
     signal?: AbortSignal
   ): Promise<T> {
     const CancelToken = axios.CancelToken;
@@ -37,7 +44,7 @@ class NewsApi {
     this.baseUrl = baseUrl;
     this.fetchInstance = axios.create({
       baseURL: baseUrl,
-      timeout: 10000,
+      timeout: 100000,
     });
   }
 
@@ -52,7 +59,7 @@ class NewsApi {
           newsApiUrls.digest,
           {
             role,
-          },
+          } as RoleData,
           signal
         );
   }
@@ -64,7 +71,22 @@ class NewsApi {
   ): Promise<TrendsData> {
     return isMock
       ? delay<TrendsData>(5000, trendsData)
-      : this.postRequest<TrendsData>(newsApiUrls.trends, { role }, signal);
+      : this.postRequest<TrendsData>(
+          newsApiUrls.trends,
+          { role } as RoleData,
+          signal
+        );
+  }
+
+  public createRole(title: string, description: string): Promise<undefined> {
+    return this.postRequest<undefined>(newsApiUrls.role, {
+      title,
+      description,
+    } as CreateRoleData);
+  }
+
+  public getInsites(): Promise<InsitesData> {
+    return this.postRequest<InsitesData>(newsApiUrls.insites, {}, undefined);
   }
 }
 
